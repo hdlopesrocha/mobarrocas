@@ -2,8 +2,6 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-lg-6">
-
-      
         </div>
         <div class="col-12 col-lg-6">
           <h3>Contato</h3>
@@ -39,11 +37,6 @@ h3 {
 
 b {
   color: rgb(34, 74, 49);
-}
-
-
-.logo {
-  padding: 32px;
 }
 
 .card {

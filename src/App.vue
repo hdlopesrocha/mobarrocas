@@ -1,21 +1,19 @@
 <template>
   <div class="wrapper gradient">
     <HeaderComponent />
-    <HomePage />
+    <router-view></router-view>
     <div class="push"></div>
   </div>
   <FooterComponent />
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue'
 import FooterComponent from './components/FooterComponent.vue'
 import HeaderComponent from './components/HeaderComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    HomePage,
     FooterComponent,
     HeaderComponent
   }

@@ -318,7 +318,6 @@ b {
   color: rgb(34, 74, 49);
 }
 
-
 .logo {
   padding: 32px;
 }
