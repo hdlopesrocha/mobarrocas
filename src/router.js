@@ -4,11 +4,11 @@ import ProductsPage from './components/ProductsPage.vue'
 
 const routes = [
     {
-        path: '/',
+        path: '/mobarrocas',
         name: 'home',
         component: HomePage
     }, {
-        path: '/products',
+        path: '/mobarrocas/products',
         name: 'products',
         component: ProductsPage
     }
