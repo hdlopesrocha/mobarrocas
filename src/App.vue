@@ -14,7 +14,10 @@ import FooterComponent from './components/FooterComponent.vue'
 import HeaderComponent from './components/HeaderComponent.vue'
 
 export default {
-  name: 'App',
+  name: 'App',  
+  mounted() {  
+    document.title = 'Aromas de Guidintesta'
+  },  
   components: {
     FooterComponent,
     HeaderComponent

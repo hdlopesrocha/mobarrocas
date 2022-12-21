@@ -1,12 +1,6 @@
 <template>
     <div class="header">
-        <div class="logo row align-items-center justify-content-center">
-          <div class="col-4 col-lg-2">
-            <a href="/mobarrocas">
-            <img src="../assets/logo.png"/></a>
-          </div>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container">
             <div class="navbar-nav">
               <div class="nav-item">
@@ -18,6 +12,16 @@
             </div>
           </div>
         </nav>
+   
+
+      </div>
+      <div class="pattern">
+        <div class="logo row align-items-center justify-content-center">
+          <div class="col-4 col-lg-2">
+            <a href="/mobarrocas">
+            <img src="../assets/logo.png"/></a>
+          </div>
+        </div>
       </div>
 </template>
 
@@ -32,6 +36,11 @@ export default {
 
 <style scoped>
 .header {
+  width: 100%;
+  height: auto;
+}
+
+.pattern {
   background: repeat-x url("../assets/plants2.png");
   width: 100%;
   height: auto;
