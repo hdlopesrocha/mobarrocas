@@ -2,7 +2,8 @@
     <div class="header">
         <div class="logo row align-items-center justify-content-center">
           <div class="col-4 col-lg-2">
-            <img src="../assets/logo.png"/>
+            <a href="/">
+            <img src="../assets/logo.png"/></a>
           </div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

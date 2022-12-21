@@ -2,8 +2,6 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12">
-        <h3>Aromas</h3>
-
         <div class="row">
           <div class="col-12 col-lg-6">
             <div v-for="product in products1" :key="product.header" class="col-12">

@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper gradient">
     <HeaderComponent />
-    <router-view></router-view>
+    <div class="page">
+      <router-view></router-view>
+    </div>
     <div class="push"></div>
   </div>
   <FooterComponent />
@@ -21,6 +23,12 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "fabfeltscript";
+  src: local("fabfeltscript"),
+   url(assets/fonts/fabfeltscript-bold.ttf) format("truetype");
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -41,6 +49,10 @@ export default {
 
 .push {
   height: 128px;
+}
+
+.page {
+  padding-top: 32px;
 }
 
 html {
