@@ -4,10 +4,10 @@
           <div class="container">
             <div class="navbar-nav">
               <div class="nav-item">
-                <router-link to="/mobarrocas" class="nav-link">Home</router-link>
+                <router-link to="/" class="nav-link">Home</router-link>
               </div>
               <div class="nav-item">
-                <router-link to="/mobarrocas/products" class="nav-link">Aromas</router-link>
+                <router-link to="/products" class="nav-link">Aromas</router-link>
               </div>
             </div>
           </div>
@@ -18,7 +18,7 @@
       <div class="pattern">
         <div class="logo row align-items-center justify-content-center">
           <div class="col-4 col-lg-2">
-            <a href="/mobarrocas">
+            <a href="/">
             <img src="../assets/logo.png"/></a>
           </div>
         </div>
