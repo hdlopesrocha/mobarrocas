@@ -1,24 +1,42 @@
 /* eslint-disable no-console */
-const execa = require("execa");
+const { execSync } = require("child_process");
 const fs = require("fs");
+const path = require("path");
+
+function run(cmd, options = {}) {
+  console.log(`> ${cmd}`);
+  execSync(cmd, { stdio: "inherit", ...options });
+}
+
 (async () => {
   try {
-    await execa("git", ["checkout", "--orphan", "gh-pages"]);
-    // eslint-disable-next-line no-console
-    console.log("Building started...");
-    await execa("npm", ["run", "build"]);
-    // Understand if it's dist or build folder
-    const folderName = fs.existsSync("dist") ? "dist" : "build";
-    await execa("git", ["--work-tree", folderName, "add", "--all"]);
-    await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages"]);
-    console.log("Pushing to gh-pages...");
-    await execa("git", ["push", "origin", "HEAD:gh-pages", "--force"]);
-    await execa("rm", ["-r", folderName]);
-    await execa("git", ["checkout", "-f", "master"]);
-    await execa("git", ["branch", "-D", "gh-pages"]);
-    console.log("Successfully deployed, check your settings");
+    const root = path.resolve(__dirname, "..");
+    const folderName = "dist";
+    const folder = path.join(root, folderName);
+
+    console.log("Building for production...");
+    run("npm run build", { cwd: root });
+
+    if (!fs.existsSync(folder)) {
+      throw new Error(`Build folder "${folderName}" not found after build`);
+    }
+
+    // SPA fallback on GitHub Pages: serve index.html for unknown routes
+    fs.copyFileSync(path.join(folder, "index.html"), path.join(folder, "404.html"));
+    // Prevent Jekyll processing (allows files/dirs starting with _)
+    fs.writeFileSync(path.join(folder, ".nojekyll"), "");
+
+    const branch = "gh-pages";
+    console.log(`Pushing ${folderName}/ to ${branch}...`);
+    // Publish dist contents to gh-pages without touching the current branch
+    run(`git init`, { cwd: folder });
+    run(`git checkout -b ${branch}`, { cwd: folder });
+    run(`git add --all`, { cwd: folder });
+    run(`git -c user.name="gh-pages-deploy" -c user.email="gh-pages-deploy@github.com" commit -m "Deploy to ${branch}"`, { cwd: folder });
+    run(`git push origin ${branch} --force`, { cwd: folder });
+
+    console.log("Successfully deployed, check your GitHub Pages settings");
   } catch (e) {
-    // eslint-disable-next-line no-console
     console.log(e.message);
     process.exit(1);
   }
