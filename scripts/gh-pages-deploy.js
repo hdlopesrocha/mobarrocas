@@ -32,9 +32,11 @@ function run(cmd, options = {}) {
       .trim();
     console.log(`Pushing ${folderName}/ to ${branch}...`);
     // Publish dist contents to gh-pages without touching the current branch
+    // Remove stale nested repo from a previous deploy so re-runs are idempotent
+    fs.rmSync(path.join(folder, ".git"), { recursive: true, force: true });
     run(`git init`, { cwd: folder });
     run(`git remote add origin ${remoteUrl}`, { cwd: folder });
-    run(`git checkout -b ${branch}`, { cwd: folder });
+    run(`git checkout -B ${branch}`, { cwd: folder });
     run(`git add --all`, { cwd: folder });
     run(`git -c user.name="gh-pages-deploy" -c user.email="gh-pages-deploy@github.com" commit -m "Deploy to ${branch}"`, { cwd: folder });
     run(`git push origin ${branch} --force`, { cwd: folder });
