@@ -27,9 +27,13 @@ function run(cmd, options = {}) {
     fs.writeFileSync(path.join(folder, ".nojekyll"), "");
 
     const branch = "gh-pages";
+    const remoteUrl = execSync("git config --get remote.origin.url", { cwd: root })
+      .toString()
+      .trim();
     console.log(`Pushing ${folderName}/ to ${branch}...`);
     // Publish dist contents to gh-pages without touching the current branch
     run(`git init`, { cwd: folder });
+    run(`git remote add origin ${remoteUrl}`, { cwd: folder });
     run(`git checkout -b ${branch}`, { cwd: folder });
     run(`git add --all`, { cwd: folder });
     run(`git -c user.name="gh-pages-deploy" -c user.email="gh-pages-deploy@github.com" commit -m "Deploy to ${branch}"`, { cwd: folder });
